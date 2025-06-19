@@ -1,5 +1,5 @@
 # Obsidian Global Menu Plugin
-The Obsidian Global Menu Plugin is a powerful tool designed to enhance your note-taking experience by providing a customizable and always-visible navigation menu within your Obsidian vaults. Say goodbye to endless searching and welcome seamless access to your most important notes or commands, right where you need them.
+The Obsidian Global Menu Plugin is a powerful tool designed to enhance your note-taking experience by providing a customizable and always-visible navigation menu within your Obsidian vaults without creating graph connections. Say goodbye to endless searching and welcome seamless access to your most important notes or commands, right where you need them.
 
 --------
 ## Features
