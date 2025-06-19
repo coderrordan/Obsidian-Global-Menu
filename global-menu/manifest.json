@@ -1,11 +1,12 @@
 {
     "id": "global-menu",
     "name": "Global Menu",
-    "version": "1.2.0",
+    "version": "1.0.0",
     "minAppVersion": "0.15.0",
     "description": "Adds a customizable global menu to all markdown pages without creating graph connections",
-    "author": "CodErrorDan",
-    "authorUrl": "",
+    "author": "Daniele Napolitano",
+    "authorUrl": "https://github.com/coderrordan",
+	"license": "MIT",
     "fundingUrl": "",
     "isDesktopOnly": true,
     "main": "main.js"
