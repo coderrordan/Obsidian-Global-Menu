@@ -6,8 +6,7 @@
     "description": "Adds a customizable global menu to all markdown pages without creating graph connections",
     "author": "Daniele Napolitano",
     "authorUrl": "https://github.com/coderrordan",
-	"license": "MIT",
+    "license": "MIT",
     "fundingUrl": "",
-    "isDesktopOnly": true,
-    "main": "main.js"
+    "isDesktopOnly": true
 }
