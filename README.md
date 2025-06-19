@@ -1,9 +1,8 @@
 # Obsidian Global Menu Plugin
-===========================
 The Obsidian Global Menu Plugin is a powerful tool designed to enhance your note-taking experience by providing a customizable and always-visible navigation menu within your Obsidian vaults. Say goodbye to endless searching and welcome seamless access to your most important notes or commands, right where you need them.
 
-## Features
 --------
+## Features
 
 ### 1\. Customizable Menus
 
@@ -89,9 +88,8 @@ The menu is designed to be responsive (space for improvement), adapting to diffe
     
 *   **Tabindex Support**: Ensure focusability for assistive technologies.
     
-
+--------
 ## Manual Installation
--------------------
 1.  **Download**:
     
     *   Download the plugin folder from the latest release.
@@ -116,9 +114,8 @@ The menu is designed to be responsive (space for improvement), adapting to diffe
     
     *   Click the gear icon next to "Global Menu" in the Community plugins list to access its settings.
         
-
+--------
 ## Usage
------
 1.  **Access Settings**: Go to Settings -> Global Menu in Obsidian.
     
 2.  **Create Menus**: In the "Menu Management" section, add and configure your custom menus and their items.
@@ -127,10 +124,10 @@ The menu is designed to be responsive (space for improvement), adapting to diffe
     
 4.  **Customize Style**: In the "Customization" section, fine-tune the menu's appearance.
     
+--------
 ## Contributing
-------------
 This plugin started as a "vibe coding" session because I genuinely needed this functionality, even though I hadn't coded in years. What began as a simple idea quickly evolved, and I found myself diving deeper into its development. Your ideas, bug reports, and pull requests are highly welcome! If you'd like to contribute, please feel free to fork the repository and submit a pull request.
 
+--------
 ## License
--------
 This project is licensed under the MIT License
