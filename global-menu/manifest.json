@@ -1,0 +1,12 @@
+{
+    "id": "global-menu",
+    "name": "Global Menu",
+    "version": "1.2.0",
+    "minAppVersion": "0.15.0",
+    "description": "Adds a customizable global menu to all markdown pages without creating graph connections",
+    "author": "Daniele",
+    "authorUrl": "",
+    "fundingUrl": "",
+    "isDesktopOnly": true,
+    "main": "main.js"
+}

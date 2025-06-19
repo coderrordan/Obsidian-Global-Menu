@@ -1,0 +1,622 @@
+/* Global Menu Plugin Styles */
+
+/* Base container for the global menu */
+.global-menu-container {
+    padding: var(--global-menu-padding);
+    border-bottom: var(--global-menu-border-width) solid var(--global-menu-border);
+    display: flex;
+    flex-wrap: wrap; /* Allow elements to wrap */
+    align-items: center;
+    justify-content: center; /* Center menu elements */
+    gap: var(--global-menu-item-gap);
+    background-color: var(--global-menu-bg);
+    border-radius: var(--global-menu-container-border-radius);
+    box-shadow: var(--shadow-s); /* Optional subtle shadow */
+    width: 100%; /* Ensure it takes full width to allow centering */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    transition: all 0.2s ease-in-out; /* Smooth transitions for style changes */
+}
+
+/* Menu position - Top (default behavior) */
+.global-menu-top {
+    /* No specific styles needed beyond what's on .global-menu-container for 'top' */
+}
+
+/* Menu position - Bottom */
+.global-menu-bottom {
+    position: sticky; /* Makes the menu fixed at the bottom of the view */
+    bottom: 0;
+    width: 100%;
+    z-index: var(--z-index-above-note); /* Ensure it's above note content */
+    padding: var(--global-menu-padding); /* Re-apply padding as it's sticky */
+    border-top: var(--global-menu-border-width) solid var(--global-menu-border); /* Border at top for bottom menu */
+    border-bottom: none; /* Remove bottom border for bottom menu */
+    border-radius: var(--global-menu-container-border-radius); /* Re-apply border radius for consistency */
+}
+
+/* Rule to apply flexbox to the leaf to push the menu to the bottom if position is "bottom" */
+/* This ensures the view content grows and pushes the sticky footer down */
+.workspace-leaf-content[data-menu-position="bottom"] {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Pushes the menu to the bottom */
+    height: 100%; /* Ensure the container takes full available height */
+    overflow: hidden; /* Prevent this container from scrolling itself */
+}
+
+/* Rule to ensure the view content takes available space and is scrollable */
+.workspace-leaf-content[data-menu-position="bottom"] .view-content {
+    flex-grow: 1; /* Allow content to fill available space */
+    overflow-y: auto; /* Allow note content to scroll independently */
+    /* Actual padding is set by JS based on menu height for better precision */
+}
+
+/* Styles for menu title */
+.global-menu-title {
+    font-family: var(--global-menu-title-font-family);
+    font-size: var(--global-menu-title-font-size);
+    font-weight: var(--global-menu-title-font-weight);
+    text-transform: var(--global-menu-title-text-transform);
+    color: var(--global-menu-text) !important; /* Ensure color is applied */
+    margin-right: var(--global-menu-item-gap); /* Space between title and first item */
+    padding-right: var(--global-menu-item-gap); /* Add padding to visually separate from the first item */
+    border-right: 1px solid var(--global-menu-border); /* Visual separator */
+    white-space: nowrap; /* Prevent title from wrapping */
+    transition: all 0.2s ease-in-out;
+}
+
+/* Styles for the list of menu items */
+.global-menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap within the list */
+    align-items: center; /* Ensure items are vertically centered */
+    gap: var(--global-menu-item-gap);
+}
+
+/* Styles for individual menu items (li) */
+.global-menu-item {
+    display: flex; /* Use flexbox for item to align content/separator */
+    align-items: center; /* Center content vertically */
+    vertical-align: middle; /* Fallback */
+    position: relative; /* For the separator */
+    padding: 0;
+    margin: 0;
+}
+
+/* Styles for menu item links (a) */
+.global-menu-item a {
+    display: block;
+    padding: var(--global-menu-item-padding);
+    text-decoration: none;
+    color: var(--global-menu-text) !important; /* Ensure color is applied */
+    background-color: transparent;
+    border-radius: var(--global-menu-border-radius);
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+
+    font-family: var(--global-menu-font-family);
+    font-size: var(--global-menu-font-size);
+    font-weight: var(--global-menu-font-weight);
+    text-transform: var(--global-menu-text-transform);
+    white-space: nowrap; /* Prevent text wrapping within item */
+}
+
+.global-menu-item a:hover {
+    background-color: var(--global-menu-hover-bg) !important;
+    color: var(--global-menu-accent) !important;
+}
+
+/* Separator for menu items */
+.global-menu-item:not(:last-child)::after {
+    content: '|';
+    color: var(--global-menu-text); /* Muted color for separator, will use general text color */
+    opacity: 0.5; /* Make it slightly transparent */
+    margin-left: var(--global-menu-item-gap); /* Space after item */
+    margin-right: calc(var(--global-menu-item-gap) / 2 * -1); /* Adjust to bring next item closer for visual balance */
+    line-height: 1; /* Ensure vertical centering for separator */
+    display: flex; /* Helps with centering */
+    align-items: center; /* Helps with centering */
+    height: 100%; /* Takes full height of the item */
+    padding-left: calc(var(--global-menu-item-gap) / 2); /* Add a little padding */
+}
+
+/* --- Style Themes (rely on JS to set variables, then use them) --- */
+
+/* For all themes, the JS sets --global-menu-* variables as inline styles on .global-menu-container.
+   These classes are primarily for visual debugging or very specific overrides if needed,
+   but colors, typography, and spacing are now universally handled by JS setting CSS variables. */
+
+/* Explicit classes for custom modes to apply `!important` to nested elements */
+.global-menu-container.global-menu-custom,
+.global-menu-container.global-menu-custom-light,
+.global-menu-container.global-menu-custom-dark,
+.global-menu-container.global-menu-auto-system,
+.global-menu-container.global-menu-light,
+.global-menu-container.global-menu-dark,
+.global-menu-container.global-menu-auto-base-light-dark { /* Added new class */
+    /* Variables are applied directly to this element via element.setCssStyles from JS */
+    /* No further static CSS needed here, relies on --global-menu-* variables */
+}
+
+/* Ensure menu items and title within all themes pick up the variables */
+.global-menu-container.global-menu-custom .global-menu-item a,
+.global-menu-container.global-menu-custom-light .global-menu-item a,
+.global-menu-container.global-menu-custom-dark .global-menu-item a,
+.global-menu-container.global-menu-auto-system .global-menu-item a,
+.global-menu-container.global-menu-light .global-menu-item a,
+.global-menu-container.global-menu-dark .global-menu-item a,
+.global-menu-container.global-menu-auto-base-light-dark .global-menu-item a { /* Added new class */
+    color: var(--global-menu-text) !important;
+    font-family: var(--global-menu-font-family) !important;
+    font-size: var(--global-menu-font-size) !important;
+    font-weight: var(--global-menu-font-weight) !important;
+    text-transform: var(--global-menu-text-transform) !important;
+}
+
+.global-menu-container.global-menu-custom .global-menu-item a:hover,
+.global-menu-container.global-menu-custom-light .global-menu-item a:hover,
+.global-menu-container.global-menu-custom-dark .global-menu-item a:hover,
+.global-menu-container.global-menu-auto-system .global-menu-item a:hover,
+.global-menu-container.global-menu-light .global-menu-item a:hover,
+.global-menu-container.global-menu-dark .global-menu-item a:hover,
+.global-menu-container.global-menu-auto-base-light-dark .global-menu-item a:hover { /* Added new class */
+    background-color: var(--global-menu-hover-bg) !important;
+    color: var(--global-menu-accent) !important;
+}
+
+.global-menu-container.global-menu-custom .global-menu-title,
+.global-menu-container.global-menu-custom-light .global-menu-title,
+.global-menu-container.global-menu-custom-dark .global-menu-title,
+.global-menu-container.global-menu-auto-system .global-menu-title,
+.global-menu-container.global-menu-light .global-menu-title,
+.global-menu-container.global-menu-dark .global-menu-title,
+.global-menu-container.global-menu-auto-base-light-dark .global-menu-title { /* Added new class */
+    color: var(--global-menu-text) !important;
+    font-family: var(--global-menu-title-font-family) !important;
+    font-size: var(--global-menu-title-font-size) !important;
+    font-weight: var(--global-menu-title-font-weight) !important;
+    text-transform: var(--global-menu-title-text-transform) !important;
+}
+
+/* Style for preview in modal */
+.global-menu-style-preview-container {
+    border: 1px solid var(--background-modifier-border);
+    border-radius: var(--radius-l);
+    padding: 10px;
+    margin-top: 15px;
+    background-color: var(--background-secondary); /* Slightly different background for preview area */
+    display: flex; /* Ensure centering works */
+    justify-content: center;
+    align-items: center;
+    min-height: 80px; /* Give it some height */
+    margin-bottom: 20px; /* Space before buttons */
+}
+
+.global-menu-style-preview-container .global-menu-container {
+    position: static; /* Override absolute positioning for preview */
+    margin: 0 auto;
+    box-shadow: none; /* No shadow for preview */
+    border: 1px solid var(--global-menu-border); /* Add a subtle border for clarity in preview */
+    border-bottom: var(--global-menu-border-width) solid var(--global-menu-border); /* Ensure border for preview */
+}
+
+/* --- Settings Tab Specific Styles --- */
+
+/* Accordion style for Style Modal */
+.global-menu-accordion {
+    border: 1px solid var(--background-modifier-border);
+    border-radius: var(--radius-s);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: var(--background-secondary); /* Slightly different background for accordions */
+}
+
+.global-menu-accordion summary {
+    padding: 10px 15px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.1em; /* Increased font size */
+    list-style: none; /* Remove default triangle */
+    position: relative; /* For custom icon */
+    color: var(--text-normal);
+    transition: background-color 0.2s ease-in-out;
+    display: flex; /* Use flexbox to align text and icons */
+    align-items: center;
+    justify-content: space-between; /* Push text to left, icons to right */
+}
+
+/* Hide default marker for accordions */
+.global-menu-accordion summary::marker,
+.global-menu-accordion summary::-webkit-details-marker {
+    display: none;
+}
+
+/* Container for accordion header icons (reset and chevron) */
+.global-menu-accordion-header-icons {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Space between reset and chevron icon */
+}
+
+/* Style for the SVG icon container (chevron) */
+.global-menu-accordion-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px; /* Set a fixed width for the icon */
+    height: 24px; /* Set a fixed height for the icon */
+    transform: rotate(0deg);
+    transition: transform 0.2s ease-in-out;
+}
+
+/* Style for the SVG itself */
+.global-menu-accordion-icon svg {
+    width: 100%;
+    height: 100%;
+    stroke: var(--text-muted); /* Color the SVG icon with muted text color */
+}
+
+/* Rotate icon when accordion is open */
+.global-menu-accordion[open] .global-menu-accordion-icon {
+    transform: rotate(90deg);
+}
+
+/* Style for the reset icon */
+.global-menu-accordion-reset-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px; /* Size for the reset icon */
+    height: 24px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.global-menu-accordion-reset-icon svg {
+    width: 100%;
+    height: 100%;
+    stroke: var(--text-muted); /* Color the reset icon */
+}
+
+.global-menu-accordion-reset-icon:hover {
+    opacity: 1;
+    transform: scale(1.1);
+    stroke: var(--interactive-accent); /* Change color on hover */
+}
+
+
+.global-menu-accordion summary:hover {
+    background-color: var(--background-modifier-hover);
+}
+
+.global-menu-accordion-content {
+    padding: 0 15px; /* Adjust padding to allow for smoother transition */
+    border-top: 1px solid var(--background-modifier-border);
+    max-height: 0; /* Initial state for hidden content */
+    overflow: hidden; /* Hide overflow content */
+    transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out; /* Smooth transition for height and padding */
+}
+
+.global-menu-accordion[open] .global-menu-accordion-content {
+    max-height: 2000px; /* Increased max-height to ensure content fits */
+    padding: 10px 15px 15px 15px; /* Final padding when open */
+}
+
+
+/* Sub-accordion style for Typography/Spacing within Color groups */
+.global-menu-sub-accordion {
+    border: 1px solid var(--background-modifier-border); /* Lighter border for distinction */
+    border-radius: var(--radius-s);
+    margin-top: 10px;
+    margin-bottom: 5px;
+    background-color: var(--background-primary); /* Slightly lighter background than parent accordion */
+}
+
+.global-menu-sub-accordion summary {
+    font-size: 1em; /* Slightly smaller font for sub-accordion titles */
+    padding: 8px 12px;
+    transition: background-color 0.2s ease-in-out;
+    display: flex; /* Use flexbox to align text and icon */
+    align-items: center;
+    justify-content: space-between; /* Push text to left, icons to right */
+}
+
+/* Hide default marker for sub-accordions */
+.global-menu-sub-accordion summary::marker,
+.global-menu-sub-accordion summary::-webkit-details-marker {
+    display: none;
+}
+
+/* Style for the SVG icon container in sub-accordions (chevron) */
+.global-menu-sub-accordion .global-menu-accordion-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px; /* Slightly smaller icon for sub-accordion */
+    height: 20px; /* Slightly smaller icon for sub-accordion */
+    transform: rotate(0deg);
+    transition: transform 0.2s ease-in-out;
+}
+
+/* Style for the SVG itself in sub-accordions */
+.global-menu-sub-accordion .global-menu-accordion-icon svg {
+    width: 100%;
+    height: 100%;
+    stroke: var(--text-muted); /* Color the SVG icon with muted text color */
+}
+
+/* Rotate icon when sub-accordion is open */
+.global-menu-sub-accordion[open] .global-menu-accordion-icon {
+    transform: rotate(90deg);
+}
+
+/* Style for the reset icon in sub-accordions */
+.global-menu-sub-accordion .global-menu-accordion-reset-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px; /* Size for the reset icon in sub-accordion */
+    height: 20px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.global-menu-sub-accordion .global-menu-accordion-reset-icon svg {
+    width: 100%;
+    height: 100%;
+    stroke: var(--text-muted); /* Color the reset icon */
+}
+
+.global-menu-sub-accordion .global-menu-accordion-reset-icon:hover {
+    opacity: 1;
+    transform: scale(1.1);
+    stroke: var(--interactive-accent); /* Change color on hover */
+}
+
+
+.global-menu-sub-accordion summary:hover {
+    background-color: var(--background-modifier-hover);
+}
+
+.global-menu-sub-accordion .global-menu-accordion-content {
+    padding: 0 12px; /* Adjust padding for smoother transition */
+    border-top: 1px solid var(--background-modifier-border);
+    max-height: 0; /* Initial state for hidden content */
+    overflow: hidden; /* Hide overflow content */
+    transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out; /* Smooth transition for height and padding */
+}
+
+.global-menu-sub-accordion[open] .global-menu-accordion-content {
+    max-height: 2000px; /* Increased max-height to ensure content fits */
+    padding: 10px 12px 12px 12px; /* Final padding when open */
+}
+
+
+/* Style for color input in settings */
+.global-menu-style-modal .setting-item-control input[type="color"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 70px; /* Wider for easier click/touch */
+    height: 28px; /* Standard height */
+    border: 1px solid var(--background-modifier-border);
+    border-radius: var(--radius-s);
+    padding: 0;
+    cursor: pointer;
+    background: none; /* Remove default background */
+    margin-left: 5px; /* Space from text input */
+}
+
+.global-menu-style-modal .setting-item-control input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+.global-menu-style-modal .setting-item-control input[type="color"]::-webkit-color-swatch {
+    border: none;
+    border-radius: var(--radius-s);
+}
+.global-menu-style-modal .setting-item-control input[type="color"]::-moz-color-swatch-wrapper {
+    padding: 0;
+}
+.global-menu-style-modal .setting-item-control input[type="color"]::-moz-color-swatch {
+    border: none;
+    border-radius: var(--radius-s);
+}
+
+/* Ensure the text input associated with the color input remains styled by Obsidian */
+.global-menu-style-modal .setting-item-control input[type="text"] {
+    flex-grow: 1; /* Allow text input to grow and take available space */
+}
+
+
+/* General settings tab improvements */
+.global-menu-setting-tab .setting-item {
+    border-bottom: 1px solid var(--background-modifier-border);
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.global-menu-setting-tab .setting-item:last-child {
+    border-bottom: none;
+}
+
+/* For menu entries - apply border and default background to all, including Main Menu */
+.global-menu-menu-entry {
+    border: 1px solid var(--background-modifier-border);
+    border-radius: var(--radius-s);
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: var(--background-secondary-alt); /* Simple background for all menus */
+}
+
+.global-menu-menu-entry .setting-item {
+    border-bottom: none; /* Remove inner borders */
+    padding: 5px 0;
+}
+.global-menu-menu-entry .setting-item:last-child {
+    padding-bottom: 0;
+}
+
+/* Ensure all buttons in MenuEditorModal are visible and don't overflow */
+.global-menu-editor-modal .setting-item-control {
+    flex-wrap: wrap; /* Allow buttons and inputs to wrap to the next line */
+    gap: 8px; /* Add some space between wrapped elements */
+    justify-content: flex-end; /* Align buttons to the right */
+}
+.global-menu-editor-modal .setting-item-control .button {
+    flex-shrink: 0;
+}
+.global-menu-editor-modal .setting-item-control .text-input {
+    flex-grow: 1; /* Allow text inputs to grow and take available space */
+    min-width: 100px; /* Ensure text inputs don't become too small */
+}
+
+/* Style for draggable menu items (drag-and-drop) */
+.global-menu-item-setting[draggable="true"] {
+    cursor: grab;
+}
+
+.global-menu-item-setting.is-dragging {
+    opacity: 0.5;
+    background-color: var(--background-modifier-hover);
+}
+
+.global-menu-item-setting.drag-over {
+    border-top: 2px solid var(--interactive-accent); /* Indicate drop position */
+}
+
+
+/* For rule entries */
+.global-menu-rule-setting {
+    border: 1px solid var(--background-modifier-border);
+    border-radius: var(--radius-s);
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: var(--background-secondary-alt);
+}
+
+.global-menu-rule-setting .setting-item-info {
+    flex: 1; /* Make info section take available space */
+}
+
+.global-menu-rule-setting .setting-item-control {
+    flex-wrap: wrap; /* Allow controls to wrap */
+    gap: 5px; /* Space between controls */
+}
+
+/* Base rule section */
+.global-menu-base-rule-section {
+    border: 1px dashed var(--interactive-accent); /* Dashed border for special section */
+    border-radius: var(--radius-l);
+    padding: 15px;
+    margin-top: 20px;
+    background-color: var(--background-secondary-alt);
+}
+.global-menu-base-rule-section h4 {
+    margin-top: 0;
+    color: var(--interactive-accent);
+}
+.global-menu-base-rule-section .setting-item {
+    border-bottom: none; /* No inner borders */
+}
+
+/* General button style adjustments if needed (Obsidian provides good defaults) */
+.global-menu-setting-tab .setting-item button.mod-cta {
+    margin-left: 10px; /* Space out CTA buttons */
+}
+
+/* Styles for custom confirmation modal */
+.global-menu-confirm-modal .modal-content {
+    padding: 20px;
+    text-align: center;
+}
+
+.global-menu-confirm-modal .setting-item {
+    border-bottom: none;
+    justify-content: center;
+}
+
+.global-menu-confirm-modal .setting-item-control {
+    gap: 15px;
+}
+
+/* --- Responsive Media Queries --- */
+
+/* Tablet and larger phones */
+@media (max-width: 768px) {
+    .global-menu-container {
+        padding: 6px 10px;
+        gap: 6px;
+    }
+    .global-menu-title {
+        font-size: 0.85em;
+        margin-right: 6px;
+        padding-right: 6px;
+    }
+    .global-menu-item a {
+        font-size: 0.8em;
+        padding: 5px 10px;
+    }
+    /* Adjust spacing layout for settings in modal */
+    .global-menu-accordion-content .setting-item {
+        flex-direction: column; /* Stack name and control on small screens */
+        align-items: flex-start;
+    }
+    .global-menu-accordion-content .setting-item-control {
+        width: 100%;
+        margin-top: 5px;
+        justify-content: flex-start;
+    }
+}
+
+/* Smaller phones */
+@media (max-width: 480px) {
+    .global-menu-container {
+        padding: 4px 8px;
+        gap: 4px;
+        flex-direction: column; /* Stack menu items vertically */
+        align-items: flex-start;
+    }
+    .global-menu-title {
+        width: 100%; /* Take full width when stacked */
+        text-align: center; /* Center title */
+        border-right: none; /* Remove vertical separator */
+        padding-right: 0;
+        margin-right: 0;
+        margin-bottom: 5px; /* Add space below title */
+        border-bottom: 1px solid var(--global-menu-border); /* Add a bottom separator */
+        padding-bottom: 5px;
+    }
+    .global-menu-list {
+        width: 100%; /* Ensure list takes full width */
+        flex-direction: column; /* Stack list items vertically */
+        align-items: center; /* Center items in the list */
+    }
+    .global-menu-item {
+        width: 100%; /* Each item takes full width */
+        justify-content: center; /* Center content within item */
+    }
+    .global-menu-item:not(:last-child)::after {
+        content: none; /* Remove separators between stacked items */
+    }
+    .global-menu-item a {
+        width: 100%; /* Make links take full width for easier tapping */
+        text-align: center;
+        padding: 8px 10px;
+        font-size: 0.85em;
+    }
+
+    .global-menu-style-modal .setting-item-control input[type="text"],
+    .global-menu-style-modal .setting-item-control input[type="color"] {
+        width: 100%; /* Make color inputs full width too */
+        margin-left: 0;
+        margin-top: 5px;
+    }
+    .global-menu-style-modal .setting-item-control {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
