@@ -87,7 +87,42 @@ The menu is designed to be responsive (space for improvement), adapting to diffe
 *   **Keyboard Navigation**: Navigate through menu items using arrow keys (Left/Right or Up/Down) and activate them with Enter.
     
 *   **Tabindex Support**: Ensure focusability for assistive technologies.
-    
+
+
+--------
+## BRAT Installation (Recommended for Beta & Easy Updates)
+BRAT allows you to easily install and update beta plugins from GitHub.
+
+1.  **Install BRAT Plugin**:
+
+    *   Open Obsidian.
+
+    *   Go to Settings (gear icon) -> Community plugins.
+
+    *   Ensure Restricted mode is off.
+
+    *   Click Browse and search for "Beta Reviewer's Auto-update Tool" (BRAT).
+
+    *   Click Install and then Enable it.
+
+2.  **Add This Plugin to BRAT**:
+
+    *   Go back to Settings -> BRAT (under Community plugins).
+
+    *   Find the section "Beta Plugin List" and click the "Add Beta Plugin" button.
+
+    *   In the "Repository for beta plugin" field, paste this: https://github.com/coderrordan/obsidian-global-menu
+
+    *   Click "Add Plugin".
+
+3.  **Enable the Plugin**:
+
+    *   Go back to Settings -> Community plugins.
+
+    *   Under "Installed plugins", you should now see "Global Menu".
+
+    *   Click the toggle switch next to "Global Menu" to enable it.
+
 --------
 ## Manual Installation
 1.  **Download**:
