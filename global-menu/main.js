@@ -252,18 +252,18 @@ class MenuEditorModal extends Modal {
 
         // Menu Name
         new Setting(contentEl)
-            .setName('Menu Name') // Translated
+            .setName('Menu Name')
             .addText(text => text
                 .setValue(this.menuData.name)
                 .setDisabled(this.isMainMenu)
                 .onChange(async (value) => {
                     this.menuData.name = value;
-                    this.titleEl.setText(`Edit Menu: ${this.menuData.name}`); // Translated
+                    this.titleEl.setText(`Edit Menu: ${this.menuData.name}`);
                 }));
 
         // Enable Menu
         new Setting(contentEl)
-            .setName('Enable Menu') // Translated
+            .setName('Enable Menu')
             .addToggle(toggle => toggle
                 .setValue(this.menuData.enabled)
                 .onChange(async (value) => {
@@ -272,7 +272,7 @@ class MenuEditorModal extends Modal {
 
         // Show Menu Title
         new Setting(contentEl)
-            .setName('Show Menu Title') // Translated
+            .setName('Show Menu Title')
             .addToggle(toggle => toggle
                 .setValue(this.menuData.showMenuTitle)
                 .onChange(async (value) => {
@@ -283,25 +283,25 @@ class MenuEditorModal extends Modal {
         // Menu Title Text (conditionally displayed)
         if (this.menuData.showMenuTitle) {
             new Setting(contentEl)
-                .setName('Menu Title Text') // Translated
+                .setName('Menu Title Text')
                 .addText(text => text
-                    .setPlaceholder('e.g. NAVIGATION') // Translated
+                    .setPlaceholder('e.g. NAVIGATION')
                     .setValue(this.menuData.menuTitle)
                     .onChange(async (value) => {
                         this.menuData.menuTitle = value;
                     }));
         }
 
-        contentEl.createEl('h4', { text: 'Menu Items' }); // Translated
+        contentEl.createEl('h4', { text: 'Menu Items' });
 
         // Add New Item Button
         new Setting(contentEl)
-            .setName('Add New Item') // Translated
+            .setName('Add New Item')
             .addButton(btn => btn
-                .setButtonText('Add Item') // Translated
+                .setButtonText('Add Item')
                 .setCta()
                 .onClick(async () => {
-                    this.menuData.items.push({ name: 'New Item', enabled: true, type: 'note', value: '', newTab: false }); // Translated
+                    this.menuData.items.push({ name: 'New Item', enabled: true, type: 'note', value: '', newTab: false });
                     this.display();
                 }));
 
@@ -353,10 +353,10 @@ class MenuEditorModal extends Modal {
             });
 
             const itemSetting = new Setting(itemEl);
-            itemSetting.setName(`Item ${itemIndex + 1}: ${item.name}`); // Translated
+            itemSetting.setName(`Item ${itemIndex + 1}: ${item.name}`);
 
             itemSetting.addToggle(toggle => toggle
-                .setTooltip('Enable/Disable this item') // Translated
+                .setTooltip('Enable/Disable this item')
                 .setValue(item.enabled)
                 .onChange(async (value) => {
                     item.enabled = value;
@@ -366,17 +366,17 @@ class MenuEditorModal extends Modal {
             itemSetting.addText(text => {
                 itemNameInput = text;
                 text
-                    .setPlaceholder('Display name') // Translated
+                    .setPlaceholder('Display name')
                     .setValue(item.name)
                     .onChange(async (value) => {
                         item.name = value;
-                        itemSetting.setName(`Item ${itemIndex + 1}: ${item.name}`); // Translated
+                        itemSetting.setName(`Item ${itemIndex + 1}: ${item.name}`);
                     });
             });
 
             itemSetting.addDropdown(dropdown => dropdown
-                .addOption('note', 'Note') // Translated
-                .addOption('command', 'Command') // Translated
+                .addOption('note', 'Note')
+                .addOption('command', 'Command')
                 .setValue(item.type || 'note')
                 .onChange(async (value) => {
                     item.type = value;
@@ -396,7 +396,7 @@ class MenuEditorModal extends Modal {
                 itemSetting.addText(text => {
                     noteValueInput = text;
                     text
-                        .setPlaceholder('Note name (e.g. My Note)') // Translated
+                        .setPlaceholder('Note name (e.g. My Note)')
                         .setValue(item.value)
                         .onChange(async (value) => {
                             item.value = value;
@@ -404,7 +404,7 @@ class MenuEditorModal extends Modal {
                 });
                 itemSetting.addButton(btn => btn
                     .setIcon('folder')
-                    .setTooltip('Choose a note') // Translated
+                    .setTooltip('Choose a note')
                     .onClick(() => {
                         new FileSuggestModal(this.app, (selected) => {
                             item.value = selected.name;
@@ -414,7 +414,7 @@ class MenuEditorModal extends Modal {
                         }).open();
                     }));
                 itemSetting.addToggle(toggle => toggle
-                    .setTooltip('Open this note in a new tab') // Translated
+                    .setTooltip('Open this note in a new tab')
                     .setValue(item.newTab !== undefined ? item.newTab : false)
                     .onChange(async (value) => {
                         item.newTab = value;
@@ -425,7 +425,7 @@ class MenuEditorModal extends Modal {
                 itemSetting.addText(text => {
                     commandValueInput = text;
                     text
-                        .setPlaceholder('Command ID (e.g. app:go-home)') // Translated
+                        .setPlaceholder('Command ID (e.g. app:go-home)')
                         .setValue(item.value)
                         .onChange(async (value) => {
                             item.value = value;
@@ -433,7 +433,7 @@ class MenuEditorModal extends Modal {
                 });
                 itemSetting.addButton(btn => btn
                     .setIcon('search')
-                    .setTooltip('Choose a command') // Translated
+                    .setTooltip('Choose a command')
                     .onClick(() => {
                         new CommandSuggestModal(this.app, (selected) => {
                             item.value = selected.id;
@@ -447,7 +447,7 @@ class MenuEditorModal extends Modal {
             // Move up/down buttons
             itemSetting.addButton(btn => btn
                 .setIcon('arrow-up')
-                .setTooltip('Move up') // Translated
+                .setTooltip('Move up')
                 .setDisabled(itemIndex === 0)
                 .onClick(() => {
                     if (itemIndex > 0) {
@@ -459,7 +459,7 @@ class MenuEditorModal extends Modal {
 
             itemSetting.addButton(btn => btn
                 .setIcon('arrow-down')
-                .setTooltip('Move down') // Translated
+                .setTooltip('Move down')
                 .setDisabled(itemIndex === this.menuData.items.length - 1)
                 .onClick(() => {
                     if (itemIndex < this.menuData.items.length - 1) {
@@ -470,7 +470,7 @@ class MenuEditorModal extends Modal {
                 }));
 
             itemSetting.addButton(btn => btn
-                .setButtonText('Remove') // Translated
+                .setButtonText('Remove')
                 .setWarning()
                 .onClick(() => {
                     this.menuData.items.splice(itemIndex, 1);
@@ -481,18 +481,18 @@ class MenuEditorModal extends Modal {
         // Save and Cancel Buttons
         new Setting(contentEl)
             .addButton(btn => btn
-                .setButtonText('Save') // Translated
+                .setButtonText('Save')
                 .setCta()
                 .onClick(() => {
                     if (this.menuData.items.length === 0) {
-                        new Notice('A menu must contain at least one item.', 3000); // Translated
+                        new Notice('A menu must contain at least one item.', 3000);
                         return;
                     }
                     this.onSave(this.menuData);
                     this.close();
                 }))
             .addButton(btn => btn
-                .setButtonText('Cancel') // Translated
+                .setButtonText('Cancel')
                 .onClick(() => {
                     this.close();
                 }));
@@ -531,7 +531,7 @@ class MenuStyleModal extends Modal {
             },
         };
         this.onSave = onSave;
-        this.titleEl.setText('Customize Menu Style'); // Translated
+        this.titleEl.setText('Customize Menu Style');
         this.modalEl.addClass('global-menu-personalization-modal');
         this.previewMenuEl = null;
 
@@ -595,16 +595,16 @@ class MenuStyleModal extends Modal {
 
         // Menu Style Selection
         new Setting(contentEl)
-            .setName('Menu Style') // Translated
-            .setDesc('Choose the visual style of the menu.') // Translated
+            .setName('Menu Style')
+            .setDesc('Choose the visual style of the menu.')
             .addDropdown(dropdown => dropdown
-                .addOption('auto-system', 'Auto (system colors)') // Updated name
-                .addOption('auto-base-light-dark', 'Auto (base light and dark mode)') // New option
-                .addOption('light', 'Always Light') // Updated name
-                .addOption('dark', 'Always Dark') // Updated name
-                .addOption('auto-custom', 'Auto (Custom Colors)') // Updated name
-                .addOption('custom-light', 'Custom Light') // Translated
-                .addOption('custom-dark', 'Custom Dark') // Translated
+                .addOption('auto-system', 'Auto (system colors)')
+                .addOption('auto-base-light-dark', 'Auto (base light and dark mode)')
+                .addOption('light', 'Always Light')
+                .addOption('dark', 'Always Dark')
+                .addOption('auto-custom', 'Auto (Custom Colors)')
+                .addOption('custom-light', 'Custom Light')
+                .addOption('custom-dark', 'Custom Dark')
                 .setValue(this.tempSettings.menuStyle)
                 .onChange(async (value) => {
                     this.tempSettings.menuStyle = value;
@@ -614,7 +614,7 @@ class MenuStyleModal extends Modal {
         // --- Global Typography Accordion ---
         this.globalTypographyDetails = contentEl.createEl('details', { cls: 'global-menu-accordion' });
         const summaryGlobalTypography = this.globalTypographyDetails.createEl('summary');
-        summaryGlobalTypography.createSpan({ text: 'Default Typography Settings' }); // Translated
+        summaryGlobalTypography.createSpan({ text: 'Default Typography Settings' });
 
         const iconContainerGlobalTypography = summaryGlobalTypography.createDiv({ cls: 'global-menu-accordion-header-icons' });
         const resetIconGlobalTypography = iconContainerGlobalTypography.createDiv({ cls: 'global-menu-accordion-reset-icon' });
@@ -630,19 +630,19 @@ class MenuStyleModal extends Modal {
 
 
         const globalTypographyContent = this.globalTypographyDetails.createDiv({ cls: 'global-menu-accordion-content' });
-        this.createTypographySetting(globalTypographyContent, 'Item Font Family', 'fontFamily', this.tempSettings.typography); // Translated
-        this.createTypographySetting(globalTypographyContent, 'Item Font Size', 'fontSize', this.tempSettings.typography, 'text'); // Translated
-        this.createTypographySetting(globalTypographyContent, 'Item Font Weight', 'fontWeight', this.tempSettings.typography, 'text'); // Translated
-        this.createTypographySetting(globalTypographyContent, 'Item Text Transform', 'textTransform', this.tempSettings.typography, 'dropdown', ['none', 'uppercase', 'capitalize', 'lowercase']); // Translated
-        this.createTypographySetting(globalTypographyContent, 'Title Font Family', 'titleFontFamily', this.tempSettings.typography); // Translated
-        this.createTypographySetting(globalTypographyContent, 'Title Font Size', 'titleFontSize', this.tempSettings.typography, 'text'); // Translated
-        this.createTypographySetting(globalTypographyContent, 'Title Font Weight', 'titleFontWeight', this.tempSettings.typography, 'text'); // Translated
-        this.createTypographySetting(globalTypographyContent, 'Title Text Transform', 'titleTextTransform', this.tempSettings.typography, 'dropdown', ['none', 'uppercase', 'capitalize', 'lowercase']); // Translated
+        this.createTypographySetting(globalTypographyContent, 'Item Font Family', 'fontFamily', this.tempSettings.typography);
+        this.createTypographySetting(globalTypographyContent, 'Item Font Size', 'fontSize', this.tempSettings.typography, 'text');
+        this.createTypographySetting(globalTypographyContent, 'Item Font Weight', 'fontWeight', this.tempSettings.typography, 'text');
+        this.createTypographySetting(globalTypographyContent, 'Item Text Transform', 'textTransform', this.tempSettings.typography, 'dropdown', ['none', 'uppercase', 'capitalize', 'lowercase']);
+        this.createTypographySetting(globalTypographyContent, 'Title Font Family', 'titleFontFamily', this.tempSettings.typography);
+        this.createTypographySetting(globalTypographyContent, 'Title Font Size', 'titleFontSize', this.tempSettings.typography, 'text');
+        this.createTypographySetting(globalTypographyContent, 'Title Font Weight', 'titleFontWeight', this.tempSettings.typography, 'text');
+        this.createTypographySetting(globalTypographyContent, 'Title Text Transform', 'titleTextTransform', this.tempSettings.typography, 'dropdown', ['none', 'uppercase', 'capitalize', 'lowercase']);
 
         // --- Global Spacing and Layout Accordion ---
         this.globalSpacingDetails = contentEl.createEl('details', { cls: 'global-menu-accordion' });
         const summaryGlobalSpacing = this.globalSpacingDetails.createEl('summary');
-        summaryGlobalSpacing.createSpan({ text: 'Default Spacing and Layout Settings' }); // Translated
+        summaryGlobalSpacing.createSpan({ text: 'Default Spacing and Layout Settings' });
 
         const iconContainerGlobalSpacing = summaryGlobalSpacing.createDiv({ cls: 'global-menu-accordion-header-icons' });
         const resetIconGlobalSpacing = iconContainerGlobalSpacing.createDiv({ cls: 'global-menu-accordion-reset-icon' });
@@ -657,18 +657,18 @@ class MenuStyleModal extends Modal {
         chevronIconGlobalSpacing.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>';
 
         const globalSpacingContent = this.globalSpacingDetails.createDiv({ cls: 'global-menu-accordion-content' });
-        this.createSpacingSetting(globalSpacingContent, 'Menu Padding', 'menuPadding', this.tempSettings.spacingLayout); // Translated
-        this.createSpacingSetting(globalSpacingContent, 'Item Padding', 'itemPadding', this.tempSettings.spacingLayout); // Translated
-        this.createSpacingSetting(globalSpacingContent, 'Item Gap', 'itemGap', this.tempSettings.spacingLayout); // Translated
-        this.createSpacingSetting(globalSpacingContent, 'Item Border Radius', 'borderRadius', this.tempSettings.spacingLayout); // Translated
-        this.createSpacingSetting(globalSpacingContent, 'Menu Border Width', 'menuBorderWidth', this.tempSettings.spacingLayout); // Translated
-        this.createSpacingSetting(globalSpacingContent, 'Menu Container Border Radius', 'menuBorderRadius', this.tempSettings.spacingLayout); // Translated
+        this.createSpacingSetting(globalSpacingContent, 'Menu Padding', 'menuPadding', this.tempSettings.spacingLayout);
+        this.createSpacingSetting(globalSpacingContent, 'Item Padding', 'itemPadding', this.tempSettings.spacingLayout);
+        this.createSpacingSetting(globalSpacingContent, 'Item Gap', 'itemGap', this.tempSettings.spacingLayout);
+        this.createSpacingSetting(globalSpacingContent, 'Item Border Radius', 'borderRadius', this.tempSettings.spacingLayout);
+        this.createSpacingSetting(globalSpacingContent, 'Menu Border Width', 'menuBorderWidth', this.tempSettings.spacingLayout);
+        this.createSpacingSetting(globalSpacingContent, 'Menu Container Border Radius', 'menuBorderRadius', this.tempSettings.spacingLayout);
 
 
         // --- Custom Light Mode Accordion ---
         this.lightColorsDetails = contentEl.createEl('details', { cls: 'global-menu-accordion' });
         const summaryLightColors = this.lightColorsDetails.createEl('summary');
-        summaryLightColors.createSpan({ text: 'Custom Light Mode Settings' }); // Translated
+        summaryLightColors.createSpan({ text: 'Custom Light Mode Settings' });
 
         const iconContainerLightColors = summaryLightColors.createDiv({ cls: 'global-menu-accordion-header-icons' });
         const resetIconLightColors = iconContainerLightColors.createDiv({ cls: 'global-menu-accordion-reset-icon' });
@@ -684,16 +684,16 @@ class MenuStyleModal extends Modal {
 
         const lightColorsContent = this.lightColorsDetails.createDiv({ cls: 'global-menu-accordion-content' });
 
-        this.createColorSetting(lightColorsContent, 'Background Color', 'menuBg', this.tempSettings.customLightStyle); // Translated
-        this.createColorSetting(lightColorsContent, 'Text Color', 'menuText', this.tempSettings.customLightStyle); // Translated
-        this.createColorSetting(lightColorsContent, 'Border Color', 'menuBorder', this.tempSettings.customLightStyle); // Translated
-        this.createColorSetting(lightColorsContent, 'Hover Background', 'menuHover', this.tempSettings.customLightStyle); // Translated
-        this.createColorSetting(lightColorsContent, 'Accent Color', 'menuAccent', this.tempSettings.customLightStyle); // Translated
+        this.createColorSetting(lightColorsContent, 'Background Color', 'menuBg', this.tempSettings.customLightStyle);
+        this.createColorSetting(lightColorsContent, 'Text Color', 'menuText', this.tempSettings.customLightStyle);
+        this.createColorSetting(lightColorsContent, 'Border Color', 'menuBorder', this.tempSettings.customLightStyle);
+        this.createColorSetting(lightColorsContent, 'Hover Background', 'menuHover', this.tempSettings.customLightStyle);
+        this.createColorSetting(lightColorsContent, 'Accent Color', 'menuAccent', this.tempSettings.customLightStyle);
 
         // Typography for Light Mode (nested)
         const lightTypographyDetails = lightColorsContent.createEl('details', { cls: 'global-menu-sub-accordion' });
         const summaryLightTypography = lightTypographyDetails.createEl('summary');
-        summaryLightTypography.createSpan({ text: 'Typography (Light Mode)' }); // Translated
+        summaryLightTypography.createSpan({ text: 'Typography (Light Mode)' });
 
         const iconContainerLightTypography = summaryLightTypography.createDiv({ cls: 'global-menu-accordion-header-icons' });
         const resetIconLightTypography = iconContainerLightTypography.createDiv({ cls: 'global-menu-accordion-reset-icon' });
@@ -707,20 +707,20 @@ class MenuStyleModal extends Modal {
         chevronIconLightTypography.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>';
         
         const lightTypographyContent = lightTypographyDetails.createDiv({ cls: 'global-menu-accordion-content' });
-        this.createTypographySetting(lightTypographyContent, 'Item Font Family', 'fontFamily', this.tempSettings.customLightStyle.typography); // Translated
-        this.createTypographySetting(lightTypographyContent, 'Item Font Size', 'fontSize', this.tempSettings.customLightStyle.typography, 'text'); // Translated
-        this.createTypographySetting(lightTypographyContent, 'Item Font Weight', 'fontWeight', this.tempSettings.customLightStyle.typography, 'text'); // Translated
-        this.createTypographySetting(lightTypographyContent, 'Item Text Transform', 'textTransform', this.tempSettings.customLightStyle.typography, 'dropdown', ['none', 'uppercase', 'capitalize', 'lowercase']); // Translated
-        this.createTypographySetting(lightTypographyContent, 'Title Font Family', 'titleFontFamily', this.tempSettings.customLightStyle.typography); // Translated
-        this.createTypographySetting(lightTypographyContent, 'Title Font Size', 'titleFontSize', this.tempSettings.customLightStyle.typography, 'text'); // Translated
-        this.createTypographySetting(lightTypographyContent, 'Title Font Weight', 'titleFontWeight', this.tempSettings.customLightStyle.typography, 'text'); // Translated
-        this.createTypographySetting(lightTypographyContent, 'Title Text Transform', 'titleTextTransform', this.tempSettings.customLightStyle.typography, 'dropdown', ['none', 'uppercase', 'capitalize', 'lowercase']); // Translated
+        this.createTypographySetting(lightTypographyContent, 'Item Font Family', 'fontFamily', this.tempSettings.customLightStyle.typography);
+        this.createTypographySetting(lightTypographyContent, 'Item Font Size', 'fontSize', this.tempSettings.customLightStyle.typography, 'text');
+        this.createTypographySetting(lightTypographyContent, 'Item Font Weight', 'fontWeight', this.tempSettings.customLightStyle.typography, 'text');
+        this.createTypographySetting(lightTypographyContent, 'Item Text Transform', 'textTransform', this.tempSettings.customLightStyle.typography, 'dropdown', ['none', 'uppercase', 'capitalize', 'lowercase']);
+        this.createTypographySetting(lightTypographyContent, 'Title Font Family', 'titleFontFamily', this.tempSettings.customLightStyle.typography);
+        this.createTypographySetting(lightTypographyContent, 'Title Font Size', 'titleFontSize', this.tempSettings.customLightStyle.typography, 'text');
+        this.createTypographySetting(lightTypographyContent, 'Title Font Weight', 'titleFontWeight', this.tempSettings.customLightStyle.typography, 'text');
+        this.createTypographySetting(lightTypographyContent, 'Title Text Transform', 'titleTextTransform', this.tempSettings.customLightStyle.typography, 'dropdown', ['none', 'uppercase', 'capitalize', 'lowercase']);
 
 
         // Spacing and Layout for Light Mode (nested)
         const lightSpacingDetails = lightColorsContent.createEl('details', { cls: 'global-menu-sub-accordion' });
         const summaryLightSpacing = lightSpacingDetails.createEl('summary');
-        summaryLightSpacing.createSpan({ text: 'Spacing and Layout (Light Mode)' }); // Translated
+        summaryLightSpacing.createSpan({ text: 'Spacing and Layout (Light Mode)' });
 
         const iconContainerLightSpacing = summaryLightSpacing.createDiv({ cls: 'global-menu-accordion-header-icons' });
         const resetIconLightSpacing = iconContainerLightSpacing.createDiv({ cls: 'global-menu-accordion-reset-icon' });
@@ -734,18 +734,18 @@ class MenuStyleModal extends Modal {
         chevronIconLightSpacing.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>';
 
         const lightSpacingContent = lightSpacingDetails.createDiv({ cls: 'global-menu-accordion-content' });
-        this.createSpacingSetting(lightSpacingContent, 'Menu Padding', 'menuPadding', this.tempSettings.customLightStyle.spacingLayout); // Translated
-        this.createSpacingSetting(lightSpacingContent, 'Item Padding', 'itemPadding', this.tempSettings.customLightStyle.spacingLayout); // Translated
-        this.createSpacingSetting(lightSpacingContent, 'Item Gap', 'itemGap', this.tempSettings.customLightStyle.spacingLayout); // Translated
-        this.createSpacingSetting(lightSpacingContent, 'Item Border Radius', 'borderRadius', this.tempSettings.customLightStyle.spacingLayout); // Translated
-        this.createSpacingSetting(lightSpacingContent, 'Menu Border Width', 'menuBorderWidth', this.tempSettings.customLightStyle.spacingLayout); // Translated
-        this.createSpacingSetting(lightSpacingContent, 'Menu Container Border Radius', 'menuBorderRadius', this.tempSettings.customLightStyle.spacingLayout); // Translated
+        this.createSpacingSetting(lightSpacingContent, 'Menu Padding', 'menuPadding', this.tempSettings.customLightStyle.spacingLayout);
+        this.createSpacingSetting(lightSpacingContent, 'Item Padding', 'itemPadding', this.tempSettings.customLightStyle.spacingLayout);
+        this.createSpacingSetting(lightSpacingContent, 'Item Gap', 'itemGap', this.tempSettings.customLightStyle.spacingLayout);
+        this.createSpacingSetting(lightSpacingContent, 'Item Border Radius', 'borderRadius', this.tempSettings.customLightStyle.spacingLayout);
+        this.createSpacingSetting(lightSpacingContent, 'Menu Border Width', 'menuBorderWidth', this.tempSettings.customLightStyle.spacingLayout);
+        this.createSpacingSetting(lightSpacingContent, 'Menu Container Border Radius', 'menuBorderRadius', this.tempSettings.customLightStyle.spacingLayout);
 
 
         // --- Custom Dark Mode Accordion ---
         this.darkColorsDetails = contentEl.createEl('details', { cls: 'global-menu-accordion' });
         const summaryDarkColors = this.darkColorsDetails.createEl('summary');
-        summaryDarkColors.createSpan({ text: 'Custom Dark Mode Settings' }); // Translated
+        summaryDarkColors.createSpan({ text: 'Custom Dark Mode Settings' });
 
         const iconContainerDarkColors = summaryDarkColors.createDiv({ cls: 'global-menu-accordion-header-icons' });
         const resetIconDarkColors = iconContainerDarkColors.createDiv({ cls: 'global-menu-accordion-reset-icon' });
@@ -760,16 +760,16 @@ class MenuStyleModal extends Modal {
 
         const darkColorsContent = this.darkColorsDetails.createDiv({ cls: 'global-menu-accordion-content' });
 
-        this.createColorSetting(darkColorsContent, 'Background Color', 'menuBg', this.tempSettings.customDarkStyle); // Translated
-        this.createColorSetting(darkColorsContent, 'Text Color', 'menuText', this.tempSettings.customDarkStyle); // Translated
-        this.createColorSetting(darkColorsContent, 'Border Color', 'menuBorder', this.tempSettings.customDarkStyle); // Translated
-        this.createColorSetting(darkColorsContent, 'Hover Background', 'menuHover', this.tempSettings.customDarkStyle); // Translated
-        this.createColorSetting(darkColorsContent, 'Accent Color', 'menuAccent', this.tempSettings.customDarkStyle); // Translated
+        this.createColorSetting(darkColorsContent, 'Background Color', 'menuBg', this.tempSettings.customDarkStyle);
+        this.createColorSetting(darkColorsContent, 'Text Color', 'menuText', this.tempSettings.customDarkStyle);
+        this.createColorSetting(darkColorsContent, 'Border Color', 'menuBorder', this.tempSettings.customDarkStyle);
+        this.createColorSetting(darkColorsContent, 'Hover Background', 'menuHover', this.tempSettings.customDarkStyle);
+        this.createColorSetting(darkColorsContent, 'Accent Color', 'menuAccent', this.tempSettings.customDarkStyle);
 
         // Typography for Dark Mode (nested)
         const darkTypographyDetails = darkColorsContent.createEl('details', { cls: 'global-menu-sub-accordion' });
         const summaryDarkTypography = darkTypographyDetails.createEl('summary');
-        summaryDarkTypography.createSpan({ text: 'Typography (Dark Mode)' }); // Translated
+        summaryDarkTypography.createSpan({ text: 'Typography (Dark Mode)' });
 
         const iconContainerDarkTypography = summaryDarkTypography.createDiv({ cls: 'global-menu-accordion-header-icons' });
         const resetIconDarkTypography = iconContainerDarkTypography.createDiv({ cls: 'global-menu-accordion-reset-icon' });
@@ -783,20 +783,20 @@ class MenuStyleModal extends Modal {
         chevronIconDarkTypography.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>';
 
         const darkTypographyContent = darkTypographyDetails.createDiv({ cls: 'global-menu-accordion-content' });
-        this.createTypographySetting(darkTypographyContent, 'Item Font Family', 'fontFamily', this.tempSettings.customDarkStyle.typography); // Translated
-        this.createTypographySetting(darkTypographyContent, 'Item Font Size', 'fontSize', this.tempSettings.customDarkStyle.typography, 'text'); // Translated
-        this.createTypographySetting(darkTypographyContent, 'Item Font Weight', 'fontWeight', this.tempSettings.customDarkStyle.typography, 'text'); // Translated
-        this.createTypographySetting(darkTypographyContent, 'Item Text Transform', 'textTransform', this.tempSettings.customDarkStyle.typography, 'dropdown', ['none', 'uppercase', 'capitalize', 'lowercase']); // Translated
-        this.createTypographySetting(darkTypographyContent, 'Title Font Family', 'titleFontFamily', this.tempSettings.customDarkStyle.typography); // Translated
-        this.createTypographySetting(darkTypographyContent, 'Title Font Size', 'titleFontSize', this.tempSettings.customDarkStyle.typography, 'text'); // Translated
-        this.createTypographySetting(darkTypographyContent, 'Title Font Weight', 'titleFontWeight', this.tempSettings.customDarkStyle.typography, 'text'); // Translated
-        this.createTypographySetting(darkTypographyContent, 'Title Text Transform', 'titleTextTransform', this.tempSettings.customDarkStyle.typography, 'dropdown', ['none', 'uppercase', 'capitalize', 'lowercase']); // Translated
+        this.createTypographySetting(darkTypographyContent, 'Item Font Family', 'fontFamily', this.tempSettings.customDarkStyle.typography);
+        this.createTypographySetting(darkTypographyContent, 'Item Font Size', 'fontSize', this.tempSettings.customDarkStyle.typography, 'text');
+        this.createTypographySetting(darkTypographyContent, 'Item Font Weight', 'fontWeight', this.tempSettings.customDarkStyle.typography, 'text');
+        this.createTypographySetting(darkTypographyContent, 'Item Text Transform', 'textTransform', this.tempSettings.customDarkStyle.typography, 'dropdown', ['none', 'uppercase', 'capitalize', 'lowercase']);
+        this.createTypographySetting(darkTypographyContent, 'Title Font Family', 'titleFontFamily', this.tempSettings.customDarkStyle.typography);
+        this.createTypographySetting(darkTypographyContent, 'Title Font Size', 'titleFontSize', this.tempSettings.customDarkStyle.typography, 'text');
+        this.createTypographySetting(darkTypographyContent, 'Title Font Weight', 'titleFontWeight', this.tempSettings.customDarkStyle.typography, 'text');
+        this.createTypographySetting(darkTypographyContent, 'Title Text Transform', 'titleTextTransform', this.tempSettings.customDarkStyle.typography, 'dropdown', ['none', 'uppercase', 'capitalize', 'lowercase']);
 
 
         // Spacing and Layout for Dark Mode (nested)
         const darkSpacingDetails = darkColorsContent.createEl('details', { cls: 'global-menu-sub-accordion' });
         const summaryDarkSpacing = darkSpacingDetails.createEl('summary');
-        summaryDarkSpacing.createSpan({ text: 'Spacing and Layout (Dark Mode)' }); // Translated
+        summaryDarkSpacing.createSpan({ text: 'Spacing and Layout (Dark Mode)' });
 
         const iconContainerDarkSpacing = summaryDarkSpacing.createDiv({ cls: 'global-menu-accordion-header-icons' });
         const resetIconDarkSpacing = iconContainerDarkSpacing.createDiv({ cls: 'global-menu-accordion-reset-icon' });
@@ -810,12 +810,12 @@ class MenuStyleModal extends Modal {
         chevronIconDarkSpacing.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>';
 
         const darkSpacingContent = darkSpacingDetails.createDiv({ cls: 'global-menu-accordion-content' });
-        this.createSpacingSetting(darkSpacingContent, 'Menu Padding', 'menuPadding', this.tempSettings.customDarkStyle.spacingLayout); // Translated
-        this.createSpacingSetting(darkSpacingContent, 'Item Padding', 'itemPadding', this.tempSettings.customDarkStyle.spacingLayout); // Translated
-        this.createSpacingSetting(darkSpacingContent, 'Item Gap', 'itemGap', this.tempSettings.customDarkStyle.spacingLayout); // Translated
-        this.createSpacingSetting(darkSpacingContent, 'Item Border Radius', 'borderRadius', this.tempSettings.customDarkStyle.spacingLayout); // Translated
-        this.createSpacingSetting(darkSpacingContent, 'Menu Border Width', 'menuBorderWidth', this.tempSettings.customDarkStyle.spacingLayout); // Translated
-        this.createSpacingSetting(darkSpacingContent, 'Menu Container Border Radius', 'menuBorderRadius', this.tempSettings.customDarkStyle.spacingLayout); // Translated
+        this.createSpacingSetting(darkSpacingContent, 'Menu Padding', 'menuPadding', this.tempSettings.customDarkStyle.spacingLayout);
+        this.createSpacingSetting(darkSpacingContent, 'Item Padding', 'itemPadding', this.tempSettings.customDarkStyle.spacingLayout);
+        this.createSpacingSetting(darkSpacingContent, 'Item Gap', 'itemGap', this.tempSettings.customDarkStyle.spacingLayout);
+        this.createSpacingSetting(darkSpacingContent, 'Item Border Radius', 'borderRadius', this.tempSettings.customDarkStyle.spacingLayout);
+        this.createSpacingSetting(darkSpacingContent, 'Menu Border Width', 'menuBorderWidth', this.tempSettings.customDarkStyle.spacingLayout);
+        this.createSpacingSetting(darkSpacingContent, 'Menu Container Border Radius', 'menuBorderRadius', this.tempSettings.customDarkStyle.spacingLayout);
 
 
         // Initial visibility check
@@ -823,7 +823,7 @@ class MenuStyleModal extends Modal {
 
 
         // Live Preview (simple representation)
-        contentEl.createEl('h4', { text: 'Menu Preview' }); // Translated
+        contentEl.createEl('h4', { text: 'Menu Preview' });
         const previewContainer = contentEl.createDiv({ cls: 'global-menu-style-preview-container' });
         this.previewMenuEl = previewContainer.createDiv({ cls: 'global-menu-container' });
         
@@ -838,17 +838,17 @@ class MenuStyleModal extends Modal {
         // Re-render a dummy menu for preview
         const mockMenuData = {
             showMenuTitle: true,
-            menuTitle: 'Menu Preview', // Translated
+            menuTitle: 'Menu Preview',
             items: [
-                { name: 'Preview Item 1', enabled: true }, // Translated
-                { name: 'Preview Item 2', enabled: true }  // Translated
+                { name: 'Preview Item 1', enabled: true },
+                { name: 'Preview Item 2', enabled: true }
             ]
         };
 
         if (mockMenuData.showMenuTitle && mockMenuData.menuTitle) {
             this.previewMenuEl.createEl('div', { text: mockMenuData.menuTitle, cls: 'global-menu-title' });
         }
-        const previewList = this.previewMenuEl.createEl('ul', { cls: 'global-menu-list' });
+        const previewList = this.previewMenuEl.createEl('ul', { cls: 'global-menu-list', tabindex: 0 });
         mockMenuData.items.forEach(item => {
             const listItem = previewList.createEl('li', { cls: 'global-menu-item' });
             listItem.createEl('a', { text: item.name, href: '#' });
@@ -857,10 +857,10 @@ class MenuStyleModal extends Modal {
         // Save and Cancel Buttons
         const buttonSection = new Setting(contentEl);
         buttonSection.addButton(btn => btn
-            .setButtonText('Reset Style') // Translated
+            .setButtonText('Reset Style')
             .setClass('mod-warning') // Apply a warning style if appropriate
             .onClick(() => {
-                new CustomConfirmModal(this.app, 'Confirm Reset Style', 'Are you sure you want to reset all style settings to default?', () => { // Translated
+                new CustomConfirmModal(this.app, 'Confirm Reset Style', 'Are you sure you want to reset all style settings to default?', () => {
                     // Reset all relevant style settings to their default values
                     this.tempSettings.menuStyle = DEFAULT_SETTINGS.menuStyle;
                     this.tempSettings.typography = JSON.parse(JSON.stringify(DEFAULT_SETTINGS.typography));
@@ -874,14 +874,14 @@ class MenuStyleModal extends Modal {
             }));
 
         buttonSection.addButton(btn => btn
-            .setButtonText('Save') // Translated
+            .setButtonText('Save')
             .setCta()
             .onClick(() => {
                 this.onSave(this.tempSettings);
                 this.close();
             }));
         buttonSection.addButton(btn => btn
-            .setButtonText('Cancel') // Translated
+            .setButtonText('Cancel')
             .onClick(() => {
                 this.close();
             }));
@@ -968,7 +968,7 @@ class MenuStyleModal extends Modal {
             .setName(name);
 
         setting.addText(text => text
-            .setPlaceholder('e.g. 10px, 1em, 2%') // Translated
+            .setPlaceholder('e.g. 10px, 1em, 2%')
             .setValue(targetObject[key])
             .onChange(async (value) => {
                 targetObject[key] = value;
@@ -1156,7 +1156,33 @@ class GlobalMenuPlugin extends Plugin {
 
         const currentFilePath = leaf.view.file.path;
         const currentFileBasename = leaf.view.file.basename;
-        const currentFileTags = this.app.metadataCache.getFileCache(leaf.view.file)?.tags?.map(tag => tag.tag.substring(1)) || [];
+        
+        // --- FIX START ---
+        // Collect all tags from various sources in the file's metadata cache
+        let currentFileTags = [];
+        const fileCache = this.app.metadataCache.getFileCache(leaf.view.file);
+
+        // 1. Tags from inline markdown or #tags: syntax
+        if (fileCache?.tags) {
+            currentFileTags = currentFileTags.concat(fileCache.tags.map(tag => tag.tag.substring(1)));
+        }
+
+        // 2. Tags from frontmatter properties (e.g., tags: [tag1, tag2] or tags: tag1)
+        if (fileCache?.frontmatter) {
+            const frontmatterTags = fileCache.frontmatter.tags;
+            if (frontmatterTags) {
+                if (Array.isArray(frontmatterTags)) {
+                    currentFileTags = currentFileTags.concat(frontmatterTags.map(tag => String(tag).replace(/^#/, '')));
+                } else if (typeof frontmatterTags === 'string') {
+                    // Handle comma-separated tags in a single string, or a single tag
+                    currentFileTags = currentFileTags.concat(frontmatterTags.split(',').map(tag => tag.trim().replace(/^#/, '')));
+                }
+            }
+        }
+        // Ensure tags are unique and cleaned up (no # prefix)
+        currentFileTags = [...new Set(currentFileTags.filter(tag => tag !== ''))];
+        // --- FIX END ---
+
         const currentFolderPath = leaf.view.file.parent.path === '/' ? '/' : leaf.view.file.parent.path + '/';
 
         let menuToDisplay = null;
@@ -1562,17 +1588,17 @@ class GlobalMenuSettingTab extends PluginSettingTab {
         const scrollPos = containerEl.scrollTop;
 
         containerEl.empty();
-        containerEl.createEl('h2', { text: 'Global Menu Settings' }); // Translated
+        containerEl.createEl('h2', { text: 'Global Menu Settings' });
 
         // --- Global Menu Appearance & Behavior ---
-        containerEl.createEl('h3', { text: 'Global Behavior' }); // Translated
+        containerEl.createEl('h3', { text: 'Global Behavior' });
 
         new Setting(containerEl)
-            .setName('Menu Position') // Translated
-            .setDesc('Where the menu should be displayed within the note content. Currently, only "Top" and "Bottom" are fully supported.') // Translated
+            .setName('Menu Position')
+            .setDesc('Where the menu should be displayed within the note content. Currently, only "Top" and "Bottom" are fully supported.')
             .addDropdown(dropdown => dropdown
-                .addOption('top', 'Top (above title)') // Translated
-                .addOption('bottom', 'Bottom (below content)') // Translated
+                .addOption('top', 'Top (above title)')
+                .addOption('bottom', 'Bottom (below content)')
                 .setValue(this.plugin.settings.menuPosition)
                 .onChange(async (value) => {
                     this.plugin.settings.menuPosition = value;
@@ -1581,8 +1607,8 @@ class GlobalMenuSettingTab extends PluginSettingTab {
                 }));
 
         new Setting(containerEl)
-            .setName('Auto-Refresh Menu') // Translated
-            .setDesc('Automatically refresh the menu when a note is opened or modified. Disable if you experience performance issues.') // Translated
+            .setName('Auto-Refresh Menu')
+            .setDesc('Automatically refresh the menu when a note is opened or modified. Disable if you experience performance issues.')
             .addToggle(toggle => toggle
                 .setValue(this.plugin.settings.autoRefresh)
                 .onChange(async (value) => {
@@ -1592,8 +1618,8 @@ class GlobalMenuSettingTab extends PluginSettingTab {
                 }));
         
         new Setting(containerEl)
-            .setName('Open Notes in New Tab by Default') // Translated
-            .setDesc('If enabled, notes opened from the menu will open in a new tab by default. Individual menu items can override this setting.') // Translated
+            .setName('Open Notes in New Tab by Default')
+            .setDesc('If enabled, notes opened from the menu will open in a new tab by default. Individual menu items can override this setting.')
             .addToggle(toggle => toggle
                 .setValue(this.plugin.settings.openLinksInNewTab)
                 .onChange(async (value) => {
@@ -1603,8 +1629,8 @@ class GlobalMenuSettingTab extends PluginSettingTab {
                 }));
         
         new Setting(containerEl)
-            .setName('Show Menu Only in Active Note') // Translated
-            .setDesc('If enabled, the menu will only appear in the currently active note pane. If disabled, it will appear in all open note panes.') // Translated
+            .setName('Show Menu Only in Active Note')
+            .setDesc('If enabled, the menu will only appear in the currently active note pane. If disabled, it will appear in all open note panes.')
             .addToggle(toggle => toggle
                 .setValue(this.plugin.settings.showMenuOnlyInActiveNote)
                 .onChange(async (value) => {
@@ -1615,19 +1641,19 @@ class GlobalMenuSettingTab extends PluginSettingTab {
 
 
         // --- Customization Section ---
-        containerEl.createEl('h3', { text: 'Customization' }); // Translated
+        containerEl.createEl('h3', { text: 'Customization' });
 
         const styleSetting = new Setting(containerEl)
-            .setName('Menu Style') // Translated
-            .setDesc('Choose and customize the visual theme of the menu.') // Translated
+            .setName('Menu Style')
+            .setDesc('Choose and customize the visual theme of the menu.')
             .addDropdown(dropdown => dropdown
-                .addOption('auto-system', 'Auto (system colors)') // Updated name
-                .addOption('auto-base-light-dark', 'Auto (base light and dark mode)') // New option
-                .addOption('light', 'Always Light') // Updated name
-                .addOption('dark', 'Always Dark') // Updated name
-                .addOption('auto-custom', 'Auto (Custom Colors)') // Updated name
-                .addOption('custom-light', 'Custom Light') // Translated
-                .addOption('custom-dark', 'Custom Dark') // Translated
+                .addOption('auto-system', 'Auto (system colors)')
+                .addOption('auto-base-light-dark', 'Auto (base light and dark mode)')
+                .addOption('light', 'Always Light')
+                .addOption('dark', 'Always Dark')
+                .addOption('auto-custom', 'Auto (Custom Colors)')
+                .addOption('custom-light', 'Custom Light')
+                .addOption('custom-dark', 'Custom Dark')
                 .setValue(this.plugin.settings.menuStyle)
                 .onChange(async (value) => {
                     this.plugin.settings.menuStyle = value;
@@ -1636,7 +1662,7 @@ class GlobalMenuSettingTab extends PluginSettingTab {
                 }));
         
         styleSetting.addButton(btn => btn
-            .setButtonText('Edit') // Translated
+            .setButtonText('Edit')
             .setIcon('pencil')
             .onClick(() => {
                 // Pass current plugin settings directly to the modal
@@ -1655,28 +1681,28 @@ class GlobalMenuSettingTab extends PluginSettingTab {
 
 
         // --- Menu Management ---
-        containerEl.createEl('h3', { text: 'Menu Management' }); // Translated
-        containerEl.createEl('p', { text: 'Manage your custom menus and their content.' }); // Translated
+        containerEl.createEl('h3', { text: 'Menu Management' });
+        containerEl.createEl('p', { text: 'Manage your custom menus and their content.' });
 
 
         new Setting(containerEl)
-            .setName('Create New Menu') // Translated
+            .setName('Create New Menu')
             .addButton(btn => btn
-                .setButtonText('New Menu') // Translated
+                .setButtonText('New Menu')
                 .setCta()
                 .onClick(async () => {
                     const newMenuId = `menu-${Date.now()}`;
                     const newMenu = {
                         id: newMenuId,
-                        name: `New Menu ${this.plugin.settings.menus.length + 1}`, // Translated
+                        name: `New Menu ${this.plugin.settings.menus.length + 1}`,
                         enabled: true,
                         showMenuTitle: true,
-                        menuTitle: 'New Menu Title', // Translated
+                        menuTitle: 'New Menu Title',
                         items: []
                     };
                     new MenuEditorModal(this.app, this.plugin, newMenu, async (updatedMenu) => {
                         if (updatedMenu.items.length === 0) {
-                            new Notice('A menu must contain at least one item.', 3000); // Translated
+                            new Notice('A menu must contain at least one item.', 3000);
                             return;
                         }
                         this.plugin.settings.menus.push(updatedMenu);
@@ -1691,10 +1717,10 @@ class GlobalMenuSettingTab extends PluginSettingTab {
             const menuEntryEl = containerEl.createEl('div', { cls: 'global-menu-menu-entry' });
 
             new Setting(menuEntryEl)
-                .setName(isMainMenu ? `Main Menu (${menu.name})` : menu.name) // Translated
+                .setName(isMainMenu ? `Main Menu (${menu.name})` : menu.name)
                 .setDesc(`ID: ${menu.id}`)
                 .addButton(btn => btn
-                    .setButtonText('Edit') // Translated
+                    .setButtonText('Edit')
                     .setIcon('pencil')
                     .onClick(() => {
                         new MenuEditorModal(this.app, this.plugin, menu, async (updatedMenu) => {
@@ -1707,24 +1733,24 @@ class GlobalMenuSettingTab extends PluginSettingTab {
                         }, isMainMenu).open();
                     }))
                 .addButton(btn => btn
-                    .setButtonText('Clone') // Translated
+                    .setButtonText('Clone')
                     .setIcon('copy')
                     .onClick(async () => {
                         const clonedMenu = JSON.parse(JSON.stringify(menu));
                         clonedMenu.id = `menu-${Date.now()}-clone`;
-                        clonedMenu.name = `${menu.name} (Cloned)`; // Translated
+                        clonedMenu.name = `${menu.name} (Cloned)`;
                         this.plugin.settings.menus.push(clonedMenu);
                         await this.plugin.saveSettings();
                         this.display();
                     }))
                 .addButton(btn => btn
-                    .setButtonText('Remove') // Translated
+                    .setButtonText('Remove')
                     .setIcon('trash')
                     .setWarning()
                     .setDisabled(isMainMenu)
-                    .setTooltip(isMainMenu ? 'The Main Menu cannot be removed.' : 'Remove this menu.') // Translated
+                    .setTooltip(isMainMenu ? 'The Main Menu cannot be removed.' : 'Remove this menu.')
                     .onClick(async () => {
-                        new CustomConfirmModal(this.app, 'Confirm Removal', `Are you sure you want to remove menu "${menu.name}"? All rules pointing to this menu will be reassigned to the "Main Menu".`, async () => { // Translated
+                        new CustomConfirmModal(this.app, 'Confirm Removal', `Are you sure you want to remove menu "${menu.name}"? All rules pointing to this menu will be reassigned to the "Main Menu".`, async () => {
                             this.plugin.settings.rules.forEach(rule => {
                                 if (rule.menuId === menu.id) {
                                     rule.menuId = MAIN_MENU_ID;
@@ -1741,13 +1767,13 @@ class GlobalMenuSettingTab extends PluginSettingTab {
 
 
         // --- Rule Management ---
-        containerEl.createEl('h3', { text: 'Rule Management' }); // Translated
-        containerEl.createEl('p', { text: 'Rules define which menu is displayed based on note properties. Rules are processed from top to bottom. The first enabled rule that matches determines the menu displayed.' }); // Translated
+        containerEl.createEl('h3', { text: 'Rule Management' });
+        containerEl.createEl('p', { text: 'Rules define which menu is displayed based on note properties. Rules are processed from top to bottom. The first enabled rule that matches determines the menu displayed.' });
 
         new Setting(containerEl)
-            .setName('Add New Rule') // Translated
+            .setName('Add New Rule')
             .addButton(btn => btn
-                .setButtonText('Add Rule') // Translated
+                .setButtonText('Add Rule')
                 .setCta()
                 .onClick(async () => {
                     const newRuleId = `rule-${Date.now()}`;
@@ -1772,10 +1798,10 @@ class GlobalMenuSettingTab extends PluginSettingTab {
             const ruleSetting = new Setting(containerEl)
                 .setClass('global-menu-rule-setting');
 
-            ruleSetting.setName(`Rule ${rulesToDisplay.length - ruleIndex}`); // Translated
+            ruleSetting.setName(`Rule ${rulesToDisplay.length - ruleIndex}`);
 
             ruleSetting.addToggle(toggle => toggle
-                .setTooltip('Enable/Disable this rule') // Translated
+                .setTooltip('Enable/Disable this rule')
                 .setValue(rule.enabled)
                 .onChange(async (value) => {
                     rule.enabled = value;
@@ -1784,11 +1810,11 @@ class GlobalMenuSettingTab extends PluginSettingTab {
                 }));
 
             ruleSetting.addDropdown(dropdown => dropdown
-                .addOption('all', 'All Notes') // Translated
-                .addOption('tag', 'Notes with Tag') // Translated
-                .addOption('folder', 'Notes in Folder') // Translated
-                .addOption('note', 'Specific Note') // Translated
-                .addOption('regex', 'Regex Match') // Translated
+                .addOption('all', 'All Notes')
+                .addOption('tag', 'Notes with Tag')
+                .addOption('folder', 'Notes in Folder')
+                .addOption('note', 'Specific Note')
+                .addOption('regex', 'Regex Match')
                 .setValue(rule.type)
                 .onChange(async (value) => {
                     rule.type = value;
@@ -1802,7 +1828,7 @@ class GlobalMenuSettingTab extends PluginSettingTab {
                 ruleSetting.addText(text => {
                     tagTextInput = text;
                     text
-                        .setPlaceholder('Tag (e.g. my-tag, without #)') // Translated
+                        .setPlaceholder('Tag (e.g. my-tag, without #)')
                         .setValue(rule.value)
                         .onChange(async (value) => {
                             rule.value = value.startsWith('#') ? value.substring(1) : value;
@@ -1812,7 +1838,7 @@ class GlobalMenuSettingTab extends PluginSettingTab {
                 });
                 ruleSetting.addButton(btn => btn
                     .setIcon('hashtag')
-                    .setTooltip('Choose a tag') // Translated
+                    .setTooltip('Choose a tag')
                     .onClick(() => {
                         new TagSuggestModal(this.app, (selected) => {
                             rule.value = selected;
@@ -1829,7 +1855,7 @@ class GlobalMenuSettingTab extends PluginSettingTab {
                 ruleSetting.addText(text => {
                     folderTextInput = text;
                     text
-                        .setPlaceholder('Folder path (e.g. folder/subfolder/)') // Translated
+                        .setPlaceholder('Folder path (e.g. folder/subfolder/)')
                         .setValue(rule.value)
                         .onChange(async (value) => {
                             rule.value = value.endsWith('/') || value === '' ? value : value + '/';
@@ -1839,7 +1865,7 @@ class GlobalMenuSettingTab extends PluginSettingTab {
                 });
                 ruleSetting.addButton(btn => btn
                     .setIcon('folder')
-                    .setTooltip('Choose a folder') // Translated
+                    .setTooltip('Choose a folder')
                     .onClick(() => {
                         new FolderSuggestModal(this.app, (selected) => {
                             rule.value = selected;
@@ -1855,7 +1881,7 @@ class GlobalMenuSettingTab extends PluginSettingTab {
                 ruleSetting.addText(text => {
                     noteTextInput = text;
                     text
-                        .setPlaceholder('Note name (e.g. My Specific Note)') // Translated
+                        .setPlaceholder('Note name (e.g. My Specific Note)')
                         .setValue(rule.value)
                         .onChange(async (value) => {
                             rule.value = value;
@@ -1865,7 +1891,7 @@ class GlobalMenuSettingTab extends PluginSettingTab {
                 });
                 ruleSetting.addButton(btn => btn
                     .setIcon('file-text')
-                    .setTooltip('Choose a note') // Translated
+                    .setTooltip('Choose a note')
                     .onClick(() => {
                         new FileSuggestModal(this.app, (selected) => {
                             rule.value = selected.name;
@@ -1881,7 +1907,7 @@ class GlobalMenuSettingTab extends PluginSettingTab {
                 ruleSetting.addText(text => {
                     regexTextInput = text;
                     text
-                        .setPlaceholder('Regular Expression (e.g. ^Daily Notes/2023-.*$)') // Translated
+                        .setPlaceholder('Regular Expression (e.g. ^Daily Notes/2023-.*$)')
                         .setValue(rule.value)
                         .onChange(async (value) => {
                             rule.value = value;
@@ -1890,13 +1916,13 @@ class GlobalMenuSettingTab extends PluginSettingTab {
                         });
                 });
             } else if (rule.type === 'all') {
-                ruleSetting.setDesc('This rule applies to all notes.'); // Translated
+                ruleSetting.setDesc('This rule applies to all notes.');
                 rule.value = '*';
             }
 
             ruleSetting.addDropdown(dropdown => {
                 if (this.plugin.settings.menus.length === 0) {
-                    dropdown.addOption('', 'No menus available'); // Translated
+                    dropdown.addOption('', 'No menus available');
                     dropdown.setDisabled(true);
                 } else {
                     this.plugin.settings.menus.forEach(menu => {
@@ -1913,7 +1939,7 @@ class GlobalMenuSettingTab extends PluginSettingTab {
 
             ruleSetting.addButton(btn => btn
                 .setIcon('arrow-up')
-                .setTooltip('Move up (higher priority)') // Translated
+                .setTooltip('Move up (higher priority)')
                 .setDisabled(ruleIndex === 0)
                 .onClick(async () => {
                     if (ruleIndex > 0) {
@@ -1935,7 +1961,7 @@ class GlobalMenuSettingTab extends PluginSettingTab {
 
             ruleSetting.addButton(btn => btn
                 .setIcon('arrow-down')
-                .setTooltip('Move down (lower priority)') // Translated
+                .setTooltip('Move down (lower priority)')
                 .setDisabled(ruleIndex === rulesToDisplay.length - 1)
                 .onClick(async () => {
                     if (ruleIndex < rulesToDisplay.length - 1) {
@@ -1956,11 +1982,11 @@ class GlobalMenuSettingTab extends PluginSettingTab {
                 }));
 
             ruleSetting.addButton(btn => btn
-                .setButtonText('Remove') // Translated
+                .setButtonText('Remove')
                 .setIcon('trash')
                 .setWarning()
                 .onClick(async () => {
-                    new CustomConfirmModal(this.app, 'Confirm Removal', `Are you sure you want to remove rule ${ruleIndex + 1}?`, async () => { // Translated
+                    new CustomConfirmModal(this.app, 'Confirm Removal', `Are you sure you want to remove rule ${ruleIndex + 1}?`, async () => {
                         this.plugin.settings.rules = this.plugin.settings.rules.filter(r => r.id !== rule.id);
                         await this.plugin.saveSettings();
                         this.display(); // Re-render settings tab
@@ -1973,13 +1999,13 @@ class GlobalMenuSettingTab extends PluginSettingTab {
         if (baseRule) {
             containerEl.createEl('hr');
             const baseRuleSettingSection = containerEl.createEl('div', { cls: 'global-menu-base-rule-section' });
-            baseRuleSettingSection.createEl('h4', { text: 'Rule 0: Fallback Menu (Applies to All Notes)' }); // Translated
-            baseRuleSettingSection.createEl('p', { text: 'This rule acts as a fallback. If no other rule matches an active note, this rule determines which menu is displayed.' }); // Translated
+            baseRuleSettingSection.createEl('h4', { text: 'Rule 0: Fallback Menu (Applies to All Notes)' });
+            baseRuleSettingSection.createEl('p', { text: 'This rule acts as a fallback. If no other rule matches an active note, this rule determines which menu is displayed.' });
 
 
             new Setting(baseRuleSettingSection)
-                .setName('Enabled') // Translated
-                .setDesc('If disabled, no menu will be shown for notes that do not match any other rule above.') // Translated
+                .setName('Enabled')
+                .setDesc('If disabled, no menu will be shown for notes that do not match any other rule above.')
                 .addToggle(toggle => toggle
                     .setValue(baseRule.enabled)
                     .onChange(async (value) => {
@@ -1989,11 +2015,11 @@ class GlobalMenuSettingTab extends PluginSettingTab {
                     }));
 
             new Setting(baseRuleSettingSection)
-                .setName('Assigned Menu') // Translated
-                .setDesc('Select which menu this fallback rule should apply.') // Translated
+                .setName('Assigned Menu')
+                .setDesc('Select which menu this fallback rule should apply.')
                 .addDropdown(dropdown => {
                     if (this.plugin.settings.menus.length === 0) {
-                        dropdown.addOption('', 'No menus available'); // Translated
+                        dropdown.addOption('', 'No menus available');
                         dropdown.setDisabled(true);
                     } else {
                         this.plugin.settings.menus.forEach(menu => {
@@ -2011,15 +2037,15 @@ class GlobalMenuSettingTab extends PluginSettingTab {
 
 
         // --- Reset All Settings ---
-        containerEl.createEl('h3', { text: 'Reset All Settings' }); // Translated
+        containerEl.createEl('h3', { text: 'Reset All Settings' });
         new Setting(containerEl)
-            .setName('Reset to default values') // Translated
-            .setDesc('Warning: This will clear all your custom menus and rules, except for the default Main Menu and its base rule.') // Translated
+            .setName('Reset to default values')
+            .setDesc('Warning: This will clear all your custom menus and rules, except for the default Main Menu and its base rule.')
             .addButton(btn => btn
-                .setButtonText('Reset All') // Translated
+                .setButtonText('Reset All')
                 .setWarning()
                 .onClick(async () => {
-                    new CustomConfirmModal(this.app, 'Confirm Reset', 'Are you sure you want to reset all settings to their default values? This action cannot be undone.', async () => { // Translated
+                    new CustomConfirmModal(this.app, 'Confirm Reset', 'Are you sure you want to reset all settings to their default values? This action cannot be undone.', async () => {
                         this.plugin.settings = JSON.parse(JSON.stringify(DEFAULT_SETTINGS));
 
                         let mainMenu = this.plugin.settings.menus.find(menu => menu.id === MAIN_MENU_ID);
@@ -2073,14 +2099,14 @@ class CustomConfirmModal extends Modal {
 
         new Setting(contentEl)
             .addButton(btn => btn
-                .setButtonText('Confirm') // Translated
+                .setButtonText('Confirm')
                 .setCta()
                 .onClick(() => {
                     this.onConfirm();
                     this.close();
                 }))
             .addButton(btn => btn
-                .setButtonText('Cancel') // Translated
+                .setButtonText('Cancel')
                 .onClick(() => {
                     this.onCancel();
                     this.close();
